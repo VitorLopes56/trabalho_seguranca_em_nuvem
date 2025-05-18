@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Seguro</title>
+</head>
+<body>
+<h2>Cadastro Seguro</h2>
+
+<form id="cadastroForm">
+    <label>Nome: <input type="text" id="nome" required></label><br><br>
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Senha: <input type="password" id="senha" required></label><br><br>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<script>
+    document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      const resposta = await fetch('http://localhost:8080/api/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha })
+      });
+
+      if (resposta.ok) {
+        alert('Usuário cadastrado com sucesso!');
+      } else {
+        alert('Erro ao cadastrar usuário.');
+      }
+    });
+</script>
+</body>
+</html>
