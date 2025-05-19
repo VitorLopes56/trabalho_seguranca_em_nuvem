@@ -3,36 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro Seguro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* fundo escuro */
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #1e1e1e; /* cinza escuro */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2c2c2c;
+            color: #fff;
+        }
+
+        input:focus {
+            outline: 2px solid #4285f4;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4285f4; /* azul estilo Google */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+    </style>
 </head>
 <body>
-<h2>Cadastro Seguro</h2>
+<div class="container">
+    <h2>Cadastro Seguro</h2>
 
-<form id="cadastroForm">
-    <label>Nome: <input type="text" id="nome" required></label><br><br>
-    <label>Email: <input type="email" id="email" required></label><br><br>
-    <label>Senha: <input type="password" id="senha" required></label><br><br>
-    <button type="submit">Cadastrar</button>
-</form>
+    <form id="cadastroForm">
+        <label>Nome:
+            <input type="text" id="nome" required>
+        </label>
+        <label>Email:
+            <input type="email" id="email" required>
+        </label>
+        <label>Senha:
+            <input type="password" id="senha" required>
+        </label>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
 
 <script>
     document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      const nome = document.getElementById('nome').value;
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('senha').value;
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
 
-      const resposta = await fetch('http://localhost:8080/api/usuarios', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, senha })
-      });
+        const resposta = await fetch('http://localhost:8080/api/usuarios', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({nome, email, senha})
+        });
 
-      if (resposta.ok) {
-        alert('Usuário cadastrado com sucesso!');
-      } else {
-        alert('Erro ao cadastrar usuário.');
-      }
+        if (resposta.ok) {
+            alert('Usuário cadastrado com sucesso!');
+        } else {
+            alert('Erro ao cadastrar usuário.');
+        }
     });
 </script>
 </body>
